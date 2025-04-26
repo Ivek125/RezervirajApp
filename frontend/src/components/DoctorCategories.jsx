@@ -1,27 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-import dermatologist from '../assets/assets_frontend/dermatologist.png'
-import stomatologist from '../assets/assets_frontend/stomatologist.png'
-import pediatricians from '../assets/assets_frontend/pediatricians.png'
-import general_physician from '../assets/assets_frontend/general_physician.png'
+import { useContext } from 'react'; // Import useContext to access context
+import { AppContext } from '../context/AppContext'; // Import the context
 
 export default function DoctorCategories() {
-  const categories = [
-    { title: 'Liječnik opće prakse', image: general_physician },
-    { title: 'Dermatolog', image: dermatologist },
-    { title: 'Stomatolog', image: stomatologist },
-    { title: 'Pedijatar', image: pediatricians },
-    
-  ]
+
+
+  const {doctorsCategories} = useContext(AppContext) // Use the context to get the doctors data
+
 
   return (
     <div className="bg-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-center text-3xl font-extrabold text-white mb-10">Specijalizacije Liječnika</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
-        {categories.map((category, index) => (
+        {doctorsCategories.map((category) => (
           <Link
-            to={`/doktori/${category.title.toLowerCase()}`} // ili `/doctor/${index}`
+            to={`/lijecnici/${category.title.toLowerCase()}`}
             key={category.title}
             className="relative rounded-2xl overflow-hidden flex flex-col items-center justify-center text-center shadow-lg bg-cover bg-center bg-no-repeat transition duration-300 hover:brightness-110 group"
             style={{

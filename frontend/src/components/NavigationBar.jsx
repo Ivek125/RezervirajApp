@@ -13,7 +13,7 @@ import { useState, useEffect } from 'react';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Liječnici', href: '/lijecnik' },
+  { name: 'Liječnici', href: '/lijecnici' },
   { name: 'O nama', href: '/o-nama' },
   { name: 'Kontakt', href: '/kontakt' },
   { name: 'Moji Termini', href: '/mojiTermini' },

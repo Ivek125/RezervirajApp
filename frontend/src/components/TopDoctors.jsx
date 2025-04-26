@@ -19,7 +19,12 @@ export const TopDoctors = () => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {doctors.slice(0, 8 ).map((doctor, index) => (
-          <Link to={`/termini/${doctor._id}`} key={index}> {/* Navigacija na detalje doktora */}
+          <Link 
+          to={`/termini/${doctor._id}`} 
+          key={index}
+          onClick={() => window.scrollTo(0, 0)}  
+            > {/* Navigacija na detalje doktora */}
+          
             <div className="doctor-card bg-white p-6 rounded-3xl shadow-lg text-center transition duration-300 transform hover:scale-105 hover:bg-gray-200">
               <img 
                 src={doctor.image} 
@@ -35,8 +40,9 @@ export const TopDoctors = () => {
 
       <div className="text-center mt-8">
         <Link 
-          to="/doktori" 
+          to="/lijecnici" 
           className="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
+          onClick={() => window.scrollTo(0, 0)} 
         >
           More
         </Link>

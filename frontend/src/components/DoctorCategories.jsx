@@ -17,6 +17,7 @@ export default function DoctorCategories() {
           <Link
             to={`/lijecnici/${category.title.toLowerCase()}`}
             key={category.title}
+            onClick={() => window.scrollTo(0, 0)}
             className="relative rounded-2xl overflow-hidden flex flex-col items-center justify-center text-center shadow-lg bg-cover bg-center bg-no-repeat transition duration-300 hover:brightness-110 group"
             style={{
               backgroundImage: `url(${category.image})`,

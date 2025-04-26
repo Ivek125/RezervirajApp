@@ -34,6 +34,7 @@ const App = () => {
       <Route path="/kontakt" element={<Contact />} />
       <Route path="/myProfile" element={<MyProfile />} />
       <Route path="/mojiTermini" element={<MyAppointments />} />
+    
       <Route path="/termini/:docID" element={<Appointment />} />
 
     </Routes>

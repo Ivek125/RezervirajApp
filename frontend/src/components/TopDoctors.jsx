@@ -18,7 +18,7 @@ export const TopDoctors = () => {
       </p>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {doctors.slice(0, 10).map((doctor, index) => (
+        {doctors.slice(0, 8 ).map((doctor, index) => (
           <Link to={`/termini/${doctor._id}`} key={index}> {/* Navigacija na detalje doktora */}
             <div className="doctor-card bg-white p-6 rounded-3xl shadow-lg text-center transition duration-300 transform hover:scale-105 hover:bg-gray-200">
               <img 

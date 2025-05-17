@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import AppointmentBooking from '../components/AppointmentBooking';
+import RelatedDoctors from '../components/RelatedDoctors';
 
 const Appointment = () => {
   const { docID } = useParams();
@@ -80,6 +81,7 @@ const Appointment = () => {
       </div>
      
 <AppointmentBooking />
+<RelatedDoctors/>
 
     </div>
   );

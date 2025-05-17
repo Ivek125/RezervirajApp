@@ -9,8 +9,8 @@ import Contact from './pages/Contact'
 import MyAppointments from './pages/MyAppointments'
 import Appointment from './pages/Appointment'
 import NavigationBar from './components/NavigationBar'
+import RelatedDoctors from './components/RelatedDoctors'
 import {Footer} from './components/Footer'
-
 
 
 

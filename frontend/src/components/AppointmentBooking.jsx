@@ -14,15 +14,29 @@ const AppointmentBooking = () => {
 
   const today = new Date();
 
-  const generateAvailableTimes = (selectedDate) => {
-    const startHour = 8;
-    const endHour = 16;
-    const slots = [];
+  const getWeekNumber = (date) => {
+    const tempDate = new Date(date.getTime());
+    tempDate.setHours(0, 0, 0, 0);
+    tempDate.setDate(tempDate.getDate() + 3 - ((tempDate.getDay() + 6) % 7));
+    const week1 = new Date(tempDate.getFullYear(), 0, 4);
+    return 1 + Math.round(((tempDate - week1) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
+  };
   
+  const generateAvailableTimes = (selectedDate) => {
+    const week = getWeekNumber(new Date(selectedDate));
+  
+    // Naizmjenična smjena: parni tjedni ujutro, neparni popodne
+    const isMorningShift = week % 2 === 0;
+  
+    // Smjena traje 6 sati
+    const startHour = isMorningShift ? 8 : 13;
+    const endHour = startHour + 6;
+  
+    const slots = [];
     const date = new Date(selectedDate);
     date.setHours(startHour, 0, 0, 0);
   
-    while (date.getHours() < endHour) {
+    while (date.getHours() < endHour || (date.getHours() === endHour && date.getMinutes() === 0)) {
       const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
       slots.push(timeString);
       date.setMinutes(date.getMinutes() + duration);
@@ -133,6 +147,8 @@ const AppointmentBooking = () => {
         </div>
       )}
     </div>
+
+    
   );
 };
 

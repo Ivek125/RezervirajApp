@@ -3,7 +3,6 @@ import appointment_img from './appointment_img.png'
 import header_img from './header_img.png'
 import group_profiles from './group_profiles.png'
 import profile_pic from './profile_pic.png'
-import contact_image from './contact_image.png'
 import about_image from './about_image.png'
 import logo from './logo.svg'
 import dropdown_icon from './dropdown_icon.svg'
@@ -33,12 +32,16 @@ import General_physician from './General_physician.png'
 import Pediatricians from './pediatricians.png'
 import Stomatologist from './stomatologist.png' // Dodajem jer ti koristiš i .png stomatologa!
 
+// About page images
+import about1 from './about1.png'
+import about2 from './about2.png'
+import contact_image from './contact_image.png'
+
 export const assets = {
   appointment_img,
   header_img,
   group_profiles,
   profile_pic,
-  contact_image,
   about_image,
   logo,
   dropdown_icon,
@@ -55,6 +58,9 @@ export const assets = {
   General_physician,
   Pediatricians,
   Stomatologist, 
+  about1,
+  about2,
+  contact_image,
 }
 
 export const doctors = [

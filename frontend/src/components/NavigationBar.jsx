@@ -38,10 +38,11 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.removeItem('isLoggedIn'); // sigurnije nego postavljanje na 'false'
     setIsLoggedIn(false);
     navigate('/');
   };
+  
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -126,7 +127,7 @@ export default function Navbar() {
             ) : (
               <button
                 onClick={handleLogin}
-                className="text-gray-300 hover:text-white px-4 py-2 rounded-md text-sm font-medium"
+                className="text-gray-300 hover:text-white px-4 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
               >
                 Login
               </button>

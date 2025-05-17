@@ -63,7 +63,7 @@ function Doctors() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8 flex-1">
           {filteredDoctors.length > 0 ? (
             filteredDoctors.map((doctor) => (
-              <Link to={`/termini/${doctor._id}`} key={doctor._id}>
+              <Link to={`/termini/${doctor._id}`} onClick={() => window.scrollTo(0, 0)} key={doctor._id}>
                 <div className="bg-white p-6 rounded-3xl shadow-lg text-center transition transform hover:scale-105 hover:bg-gray-200 relative group cursor-pointer">
                   
                   <img

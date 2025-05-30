@@ -79,7 +79,7 @@ function MyProfile() {
           <p className="text-gray-500 text-sm">{user.location}</p>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-4">
         {[
   { label: 'Ime', key: 'name' },
   { label: 'Prezime', key: 'surname' },
@@ -127,18 +127,18 @@ function MyProfile() {
 
         </div>
 
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-right">
           {isEditing ? (
             <>
               <button
                 onClick={handleSave}
-                className="bg-gray-600 text-white px-4 py-2 rounded-md mr-2 hover:cursor-pointer"
+                className="bg-gray-800 text-white px-4 py-2 rounded-md mr-2 hover:cursor-pointer hover:bg-gray-600 hover:text-white "
               >
                 Spremi
               </button>
               <button
                 onClick={handleEditToggle}
-                className="bg-gray-400 text-white px-4 py-2 rounded-md hover:cursor-pointer"
+                 className="mt-4 md:mt-0 text-red-600 border-2 hover:bg-red-600 hover:text-white cursor-pointer px-4 py-2 rounded-md shadow-md transition"
               >
                 Odustani
               </button>
@@ -146,7 +146,7 @@ function MyProfile() {
           ) : (
             <button
               onClick={handleEditToggle}
-              className="bg-gray-600 text-white px-4 py-2 rounded-md hover:cursor-pointer"
+              className="bg-gray-800 text-white px-4 py-2 rounded-md mr-2 hover:cursor-pointer hover:bg-gray-600 hover:text-white "
             >
               Uredi profil
             </button>

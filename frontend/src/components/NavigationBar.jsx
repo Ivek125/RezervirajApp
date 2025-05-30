@@ -6,10 +6,11 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
+  Transition,
 } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -38,14 +39,13 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn'); // sigurnije nego postavljanje na 'false'
+    localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
     navigate('/');
   };
-  
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50 shadow-md">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-6">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -72,7 +72,7 @@ export default function Navbar() {
                         isActive
                           ? 'bg-gray-900 text-white'
                           : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                        'rounded-md px-3 py-2 text-sm font-medium'
+                        'rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200'
                       )
                     }
                   >
@@ -97,32 +97,42 @@ export default function Navbar() {
                     />
                   </MenuButton>
                 </div>
-                <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
-                  <MenuItem>
-                    <NavLink
-                      to="/myProfile"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Your Profile
-                    </NavLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavLink
-                      to="/settings"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Settings
-                    </NavLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Sign out
-                    </button>
-                  </MenuItem>
-                </MenuItems>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-300"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-250"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <MenuItems className="absolute right-0 z-10 mt-2 w-60 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-hidden">
+                    <MenuItem>
+                      <NavLink
+                        to="/myProfile"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Your Profile
+                      </NavLink>
+                    </MenuItem>
+                    <MenuItem>
+                      <NavLink
+                        to="/settings"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Settings
+                      </NavLink>
+                    </MenuItem>
+                    <MenuItem>
+                      <button
+                        onClick={handleLogout}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Sign out
+                      </button>
+                    </MenuItem>
+                  </MenuItems>
+                </Transition>
               </Menu>
             ) : (
               <button
@@ -136,27 +146,37 @@ export default function Navbar() {
         </div>
       </div>
 
-      <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pt-2 pb-3">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as={NavLink}
-              to={item.href}
-              className={({ isActive }) =>
-                classNames(
-                  isActive
-                    ? 'bg-gray-900 text-white'
-                    : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                  'block rounded-md px-3 py-2 text-base font-medium'
-                )
-              }
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
-        </div>
-      </DisclosurePanel>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-500"
+        enterFrom="transform opacity-0 -translate-y-2"
+        enterTo="transform opacity-100 translate-y-0"
+        leave="transition ease-in duration-550"
+        leaveFrom="transform opacity-100 translate-y-0"
+        leaveTo="transform opacity-0 -translate-y-2"
+      >
+        <DisclosurePanel className="sm:hidden">
+          <div className="space-y-3 px-2 pt-2 pb-3">
+            {navigation.map((item) => (
+              <DisclosureButton
+                key={item.name}
+                as={NavLink}
+                to={item.href}
+                className={({ isActive }) =>
+                  classNames(
+                    isActive
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block rounded-md px-3 py-2 text-base font-medium transition-colors duration-500'
+                  )
+                }
+              >
+                {item.name}
+              </DisclosureButton>
+            ))}
+          </div>
+        </DisclosurePanel>
+      </Transition>
     </Disclosure>
   );
 }

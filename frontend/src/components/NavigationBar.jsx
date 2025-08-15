@@ -10,7 +10,9 @@ import {
 } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect, Fragment, useContext } from 'react';
+import { AppContext } from '../context/AppContext';
+
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -27,27 +29,20 @@ function classNames(...classes) {
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  const { token, setToken } = useContext(AppContext);
 
-  useEffect(() => {
-    const loggedInStatus = localStorage.getItem('isLoggedIn') === 'true';
-    setIsLoggedIn(loggedInStatus);
-  }, []);
-
-  const handleLogin = () => {
-    navigate('/login');
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('isLoggedIn');
-    setIsLoggedIn(false);
-    navigate('/');
+  const logout = () => {
+    localStorage.removeItem("token");
+    setToken(false);
+    navigate("/");
   };
 
   return (
     <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50 shadow-md">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-6">
         <div className="relative flex h-16 items-center justify-between">
+          {/* Mobile menu button */}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 bg-gray-800 text-white hover:bg-gray-700 focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
               <span className="absolute -inset-0.5" />
@@ -57,6 +52,7 @@ export default function Navbar() {
             </DisclosureButton>
           </div>
 
+          {/* Logo + Links */}
           <div className="flex flex-1 items-left justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
               <h1 className="text-gray-300 rounded-md px-3 py-2 text-md font-black">RezervirajApp</h1>
@@ -83,16 +79,17 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* Right side user menu / login */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {isLoggedIn ? (
+            {token ? (
               <Menu as="div" className="relative ml-3">
                 <div>
                   <MenuButton className="relative flex rounded-full bg-green-500 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                     <span className="absolute -inset-1.5" />
                     <span className="sr-only">Open user menu</span>
                     <img
-                      alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt="User Avatar"
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       className="size-8 rounded-full"
                     />
                   </MenuButton>
@@ -112,7 +109,7 @@ export default function Navbar() {
                         to="/myProfile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Your Profile
+                        Moj Profil
                       </NavLink>
                     </MenuItem>
                     <MenuItem>
@@ -120,15 +117,15 @@ export default function Navbar() {
                         to="/settings"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Settings
+                        Postavke
                       </NavLink>
                     </MenuItem>
                     <MenuItem>
                       <button
-                        onClick={handleLogout}
+                        onClick={logout}
                         className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Sign out
+                        Odjava
                       </button>
                     </MenuItem>
                   </MenuItems>
@@ -136,7 +133,7 @@ export default function Navbar() {
               </Menu>
             ) : (
               <button
-                onClick={handleLogin}
+                onClick={() => navigate("/login")}
                 className="text-gray-300 hover:text-white px-4 py-2 rounded-md text-sm font-medium hover:cursor-pointer"
               >
                 Login
@@ -146,6 +143,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile menu panel */}
       <Transition
         as={Fragment}
         enter="transition ease-out duration-500"

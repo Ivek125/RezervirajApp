@@ -22,12 +22,7 @@ function MyProfile() {
 
   const [formData, setFormData] = useState(user);
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
-    if (!isLoggedIn) {
-      navigate('/login');
-    }
-  }, [navigate]);
+  
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);

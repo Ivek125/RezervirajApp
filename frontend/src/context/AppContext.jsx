@@ -13,12 +13,8 @@ const AppContextProvider = (props)=> {
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [doctors, setDoctors] = useState([])
-    const value = {
-        doctors,
-        doctorsCategories,
-        backendUrl,
-        
-    }
+      const [token, setToken] = useState(() => localStorage.getItem("token") || ""); //odmah ucitati token iz localStorage kad se app pokrene
+   
 
 
     //API poziva za doktore
@@ -34,6 +30,13 @@ const AppContextProvider = (props)=> {
             console.log(error)
             toast.error(error.message)
         }
+    }
+     const value = {
+        doctors,
+        doctorsCategories,
+        backendUrl,
+        token,
+        setToken
     }
 
     useEffect(() => {

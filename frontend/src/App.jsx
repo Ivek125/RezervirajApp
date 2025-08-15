@@ -11,6 +11,7 @@ import Appointment from './pages/Appointment'
 import NavigationBar from './components/NavigationBar'
 import RelatedDoctors from './components/RelatedDoctors'
 import {Footer} from './components/Footer'
+import { ToastContainer, toast } from 'react-toastify'
 
 
 
@@ -19,10 +20,8 @@ import {Footer} from './components/Footer'
 const App = () => {
   return (
     <div className="w-full lg:w-[80%] mx-auto">
-
-   <NavigationBar/>
-   
-   
+      <ToastContainer />
+      <NavigationBar />
 
     <Routes>
       <Route path="/" element={<Home />} />

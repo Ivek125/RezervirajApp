@@ -44,7 +44,7 @@ const Sidebar = () => {
           </NavLink>
 
           <NavLink
-            to="/admin/doctors"
+            to="/admin/all-doctors"
             onClick={() => setIsOpen(false)}
             className={({ isActive }) =>
               `${navItemClass} ${isActive ? activeNavItemClass : ''}`

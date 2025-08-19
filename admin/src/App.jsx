@@ -5,9 +5,10 @@ import Login from './pages/Login'
 import { useContext } from 'react';
 import Navbar from './components/Navbar';
 import { AdminContext } from './context/AdminContext';
+import { DoctorContext } from './context/DoctorContext';
 import Sidebar from './components/sidebar';
 import { Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Admin/Dashborad';
+import Dashboard from './pages/Admin/Dashboard';
 import DoctorList from './pages/Admin/DoctorList';
 import AllAppointments from './pages/Admin/AllAppointments';
 import AddDoctor from './pages/Admin/AddDoctor';
@@ -17,7 +18,9 @@ import AddDoctor from './pages/Admin/AddDoctor';
 const App = () => {
 
   const {aToken} = useContext(AdminContext)
-  return !aToken ? (
+  const {dToken} = useContext(DoctorContext)
+
+  return !aToken && !dToken ? (
     <div>
       <Login />
       <ToastContainer />

@@ -28,6 +28,7 @@ const DoctorList = () => {
             <div className="mt-4">
               <p className="text-lg font-semibold text-gray-900">{item.name}</p>
               <p className="text-sm text-gray-500">{item.speciality}</p>
+              <p className="text-sm text-gray-500">{item.email}</p>
 
               <div className="flex items-center mt-3 space-x-2">
                 <input 

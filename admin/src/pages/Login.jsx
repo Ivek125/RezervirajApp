@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { assets } from '../assets/assets.js';
 import { AdminContext } from '../context/AdminContext.jsx';
+import { DoctorContext } from '../context/DoctorContext.jsx';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
@@ -11,31 +11,41 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const { setAToken, backendUrl } = useContext(AdminContext);
+  const { dToken, setDToken } = useContext(DoctorContext);
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
-    try {  
-        
-        if (state === 'Admin'){
+    try {
 
-            const {data} = await axios.post(backendUrl + '/api/admin/login', {  
-                email,
-                password
-            });
-            if (data.success) { 
-                localStorage.setItem('aToken', data.token);
-                setAToken(data.token);
-                 toast.success(data.message)
-                
-            }else{
-                console.log(data.message);
-                 
-            }
-        }else{
+      if (state === 'Admin') {
 
-        }
+        const { data } = await axios.post(backendUrl + '/api/admin/login', {
+          email,
+          password
+        });
+        if (data.success) {
+          localStorage.setItem('aToken', data.token);
+          setAToken(data.token);
+          toast.success(data.message)
+
+        } 
+        }else {
+          const { data } = await axios.post(backendUrl + '/api/doctor/login', {
+            email,
+            password
+          });
+          if (data.success) {
+            localStorage.setItem('dToken', data.token);
+            setDToken(data.token);
+            toast.success(data.message);
+            console.log(data.token);
+          } else {
+            toast.error(data.message);
+          }
+      }
     } catch (error) {
-       toast.error('Krivi podaci. Pokušaj ponovo');
+      toast.error('Krivi podaci. Pokušaj ponovo');
     }
   }
 
@@ -88,29 +98,29 @@ function Login() {
 
           {/* Toggle text */}
           <div className="mt-4 text-center">
-          {
-  state === 'Admin' ? (
-    <p className="text-sm text-gray-600 text-center mt-4">
-      Nisi admin?{' '}
-      <span
-        onClick={() => setState('Doctor')}
-        className="text-blue-600 hover:underline cursor-pointer"
-      >
-        Doctor Login
-      </span>
-    </p>
-  ) : (
-    <p className="text-sm text-gray-600 text-center mt-4">
-      Nisi doktor?{' '}
-      <span
-        onClick={() => setState('Admin')}
-        className="text-blue-600 hover:underline cursor-pointer"
-      >
-        Admin Login
-      </span>
-    </p>
-  )
-}
+            {
+              state === 'Admin' ? (
+                <p className="text-sm text-gray-600 text-center mt-4">
+                  Nisi admin?{' '}
+                  <span
+                    onClick={() => setState('Doctor')}
+                    className="text-blue-600 hover:underline cursor-pointer"
+                  >
+                    Doctor Login
+                  </span>
+                </p>
+              ) : (
+                <p className="text-sm text-gray-600 text-center mt-4">
+                  Nisi doktor?{' '}
+                  <span
+                    onClick={() => setState('Admin')}
+                    className="text-blue-600 hover:underline cursor-pointer"
+                  >
+                    Admin Login
+                  </span>
+                </p>
+              )
+            }
 
           </div>
         </div>

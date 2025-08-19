@@ -2,6 +2,8 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import {v2 as cloudinary} from 'cloudinary';
 import doctorModel from '../models/doctorModel.js'; // Import the doctor model
+import appointmentModel from '../models/appointmentModel.js';
+import userModel from '../models/userModel.js'; // Import the user model
 import jwt from 'jsonwebtoken'; // Import JWT for token generation
 
 
@@ -97,4 +99,76 @@ const addDoctor = async (req, res) => {
     }
   };
 
-export {addDoctor, loginAdmin, allDoctors};
+
+  //API za listu termina
+const appointmentsAdmin = async (req, res) => {
+  try {
+    const appointments = await appointmentModel.find({});
+    res.json({ success: true, appointments });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+//API za otkazivanje termina
+const cancelAppointment = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+
+    if (!appointmentId) {
+      return res.status(400).json({ success: false, message: 'Missing appointment ID' });
+    }
+
+    const appointment = await appointmentModel.findById(appointmentId);
+
+    if (!appointment) {
+      return res.status(404).json({ success: false, message: 'Appointment not found' });
+    }
+
+    appointment.status = 'canceled';
+    await appointment.save();
+
+    res.json({ success: true, message: 'Appointment canceled successfully' });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// API za statistiku
+ const adminDashboard = async (req, res) => {
+  try {
+    const doctors = await doctorModel.find({});
+    const users = await userModel.find({});
+    const appointments = await appointmentModel.find({});
+
+    // Statistika po danima
+    const appointmentsByDay = {};
+    const appointmentsByHour = {};
+
+    appointments.forEach((appt) => {
+      const day = new Date(appt.slotDate).toLocaleDateString("en-US", { weekday: 'long' });
+      appointmentsByDay[day] = (appointmentsByDay[day] || 0) + 1;
+
+      const hour = appt.slotTime.split(":")[0]; // Pretpostavljamo format HH:MM
+      appointmentsByHour[hour] = (appointmentsByHour[hour] || 0) + 1;
+    });
+
+    const dashData = {
+      doctors: doctors.length,
+      patients: users.length,
+      appointments: appointments.length,
+      latestAppointments: appointments.reverse().slice(0, 5),
+      appointmentsByDay,
+      appointmentsByHour
+    };
+
+    res.json({ success: true, dashData });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export {addDoctor, loginAdmin, allDoctors, appointmentsAdmin, cancelAppointment, adminDashboard };

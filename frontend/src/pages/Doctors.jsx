@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
+import RelatedDoctors from "../components/RelatedDoctors";
 
 function Doctors() {
   const { doctors, doctorsCategories } = useContext(AppContext);
@@ -74,7 +75,7 @@ function Doctors() {
               
                   <h2 className="text-xl font-semibold text-gray-800 mb-2">{doctor.name}</h2>
                   <p className="text-sm text-gray-500 mb-2">{doctor.speciality}</p>
-                  <p className="text-xs text-gray-400">{doctor.experience} iskustva</p>
+                  <p className="text-xs text-gray-400">{doctor.experience} godina iskustva</p>
 
                   <div className="absolute inset-0 flex justify-center items-center opacity-0 group-hover:opacity-100 transition duration-300">
                     {/* Add hover effect if necessary */}

@@ -61,3 +61,4 @@ const doctorSchema = new mongoose.Schema({
 const doctorModel = mongoose.models.doctors || mongoose.model('doctors', doctorSchema);
 
 export default doctorModel;
+

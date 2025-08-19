@@ -32,17 +32,7 @@ const Sidebar = () => {
         ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:static`}
       >
         <ul className="flex flex-col gap-2 border-t border-white mt-10 md:mt-0">
-          <NavLink
-            to="/admin/dashboard"
-            onClick={() => setIsOpen(false)}
-            className={({ isActive }) =>
-              `${navItemClass} ${isActive ? activeNavItemClass : ''} mt-2`
-            }
-          >
-            <img src={assets.home_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-            <p>Dashboard</p>
-          </NavLink>
-
+          
           <NavLink
             to="/admin/all-doctors"
             onClick={() => setIsOpen(false)}
@@ -75,6 +65,17 @@ const Sidebar = () => {
             <img src={assets.add_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
             <p>Add Doctor</p>
           </NavLink>
+          <NavLink
+            to="/admin/dashboard"
+            onClick={() => setIsOpen(false)}
+            className={({ isActive }) =>
+              `${navItemClass} ${isActive ? activeNavItemClass : ''} mt-2`
+            }
+          >
+            <img src={assets.home_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
+            <p>Statistika</p>
+          </NavLink>
+
         </ul>
       </div>
     </>

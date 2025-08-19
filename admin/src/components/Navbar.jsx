@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { AdminContext } from '../context/AdminContext';
 import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
+import { LogOut } from 'lucide-react';
+
 
 const Navbar = () => {
   const { aToken, setAToken } = useContext(AdminContext);
@@ -37,7 +39,7 @@ const Navbar = () => {
   className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition cursor-pointer
              w-1/2 m-auto sm:w-auto sm:mt-0 mb-2  sm:relative top-2 right- sm:mr-0"
 >
-  Logout
+  <LogOut size={20} />
 </button>
 
 

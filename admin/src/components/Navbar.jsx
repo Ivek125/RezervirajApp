@@ -26,7 +26,7 @@ const Navbar = () => {
           <img
             src={assets.admin_logo}
             alt="Logo"
-            className="h-10 w-auto cursor-pointer mx-auto sm:mx-0"
+            className="h-10 w-auto mx-auto sm:mx-0"
           />
           <span className="text-lg font-semibold mt-2 sm:mt-0 md:ml-auto">
             {aToken ? 'Admin' : 'Doctor'} Panel

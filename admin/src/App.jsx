@@ -12,7 +12,9 @@ import Dashboard from './pages/Admin/Dashboard';
 import DoctorList from './pages/Admin/DoctorList';
 import AllAppointments from './pages/Admin/AllAppointments';
 import AddDoctor from './pages/Admin/AddDoctor';
-
+import DoctorDashboard from './pages/Doctor/DoctorDashboard';
+import DoctorProfile from './pages/Doctor/DoctorProfile';
+import DoctorAppointment from './pages/Doctor/DoctorAppointment';
 
 
 const App = () => {
@@ -32,11 +34,17 @@ const App = () => {
         <div className='flex items-start bg-white'>
           <Sidebar />
           <Routes>
-             <Route path='/' element={<></>} />
+            {/* Admin Routes */}
+            <Route path='/' element={<></>} />
             <Route path='/admin/dashboard' element={<Dashboard />} />
             <Route path='/admin/all-doctors' element={<DoctorList />} />
             <Route path='/admin/appointments' element={<AllAppointments />} />
             <Route path='/admin/add-doctor' element={<AddDoctor />} />
+
+            {/* Doctor Routes */}
+            <Route path='/doctor/dashboard' element={<DoctorDashboard />} />
+            <Route path='/doctor/profile' element={<DoctorProfile />} />
+            <Route path='/doctor/appointments' element={<DoctorAppointment />} />
           </Routes>
         </div>
     </div>

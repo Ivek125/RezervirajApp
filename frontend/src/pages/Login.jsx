@@ -54,7 +54,7 @@ useEffect(() => {
           localStorage.setItem("token", data.token);
           setToken(data.token);
           toast.success("Uspješan login!");
-          navigate("/"); // preusmjeri nakon logina
+          navigate("/");
         } else {
           toast.error(data.message);
         }
@@ -94,7 +94,7 @@ useEffect(() => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+                  className="mt-1 p-2 w-full border border-gray-300 rounded-md" 
                   placeholder="Unesi lozinku"
                 />
               </div>

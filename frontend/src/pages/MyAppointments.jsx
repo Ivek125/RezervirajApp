@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const MyAppointments = () => {
   const { backendUrl, token, getDoctorsData } = useContext(AppContext);
   const [appointments, setAppointments] = useState([]);
-  const [filter, setFilter] = useState("all"); // all | pending | accepted | canceled
+  const [filter, setFilter] = useState("all"); // all | pending | confirmed | canceled
 
   // Dohvati sve termine korisnika
   const getUserAppointments = async () => {
@@ -53,7 +53,7 @@ const MyAppointments = () => {
   // Filtriraj termine prema statusu
   const filteredAppointments = appointments.filter((item) => {
     if (filter === "pending") return item.status === "pending";
-    if (filter === "accepted") return item.status === "accepted";
+    if (filter === "confirmed") return item.status === "confirmed";
     if (filter === "canceled") return item.status === "canceled";
     return true; // all
   });
@@ -72,7 +72,7 @@ const MyAppointments = () => {
           >
             <option value="all">Svi</option>
             <option value="pending">Pending</option>
-            <option value="accepted">Prihvaćeni</option>
+            <option value="confirmed">Prihvaćeni</option>
             <option value="canceled">Otkazani</option>
           </select>
         </div>
@@ -87,7 +87,7 @@ const MyAppointments = () => {
             // Odredi boju statusa
             let statusColor = "text-gray-800";
             if (item.status === "canceled") statusColor = "text-red-600";
-            if (item.status === "accepted") statusColor = "text-green-600";
+            if (item.status === "confirmed") statusColor = "text-green-600";
             if (item.status === "pending") statusColor = "text-yellow-600";
 
             return (
@@ -122,7 +122,7 @@ const MyAppointments = () => {
                     Status:{" "}
                     {item.status === "pending"
                       ? "Pending"
-                      : item.status === "accepted"
+                      : item.status === "confirmed"
                       ? "Prihvaćeno"
                       : "Otkazano"}
                   </p>

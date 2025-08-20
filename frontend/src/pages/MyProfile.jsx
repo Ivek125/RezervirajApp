@@ -94,6 +94,7 @@ function MyProfile() {
               isEditing ? "hover:cursor-pointer" : ""
             }`}
             onClick={handleImageClick}
+            
           />
           <input
             type="file"
@@ -101,7 +102,7 @@ function MyProfile() {
             accept="image/*"
             ref={fileInputRef}
             onChange={handleChange}
-            className="hidden"
+            className="hidden" 
           />
 
           <h2 className="text-xl font-bold mt-4">

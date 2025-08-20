@@ -22,9 +22,9 @@ const Header = () => {
       </div>
       <div className="w-full md:w-1/2 flex justify-center md:justify-end ">
         <img
-          src={assets.header_img}
+          src={assets.appointment_img}
           alt="Slika doktora"
-          className="md:w-2/3 h-auto rounded-lg shadow-md min-w-[300px]"
+          className="md:w-2/3 h-auto min-w-[300px]"
         />
 
       </div>

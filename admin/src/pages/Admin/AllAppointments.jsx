@@ -17,7 +17,7 @@ const AllAppointments = () => {
       {appointments.length === 0 ? (
         <p className="text-gray-600 text-lg">Nema termina.</p>
       ) : (
-        appointments.map((appointment, index) => {
+        appointments.reverse().map((appointment, index) => {
           const doctor = appointment.docData || {};
           const patient = appointment.userData || {};
 

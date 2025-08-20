@@ -110,7 +110,7 @@ const updateProfile = async (req, res) => {
  const updatedUser = await userModel.findByIdAndUpdate(userId, {
      name,
      phone,
-     address,
+   address,
      dob,
      gender,
 
@@ -136,10 +136,12 @@ const updateProfile = async (req, res) => {
 const bookAppointment = async (req, res) => {
  
   try {
-    const { userId } = req.user; 
-    const { doctorId, slotDate, slotTime } = req.body;
+  const { userId } = req.user; 
+  // accept both docId and doctorId for compatibility
+  const { docId: docIdRaw, doctorId: doctorIdRaw, slotDate, slotTime } = req.body;
+  const doctorId = docIdRaw || doctorIdRaw;
 
-    const docData = await doctorModel.findById(doctorId).select('-password');
+  const docData = await doctorModel.findById(doctorId).select('-password');
     
     if (!docData.available) {
       return res.json({ success: false, message: 'Doctor is not available' });
@@ -180,7 +182,7 @@ const bookAppointment = async (req, res) => {
     await newAppointment.save();
 
     // spremanje podataka u doktorData
-    await doctorModel.findByIdAndUpdate(doctorId, { slots_booked: slots_booked });
+  await doctorModel.findByIdAndUpdate(doctorId, { slots_booked: slots_booked });
     res.json({ success: true, message: 'Appointment booked successfully' });
 
 
@@ -226,8 +228,8 @@ const cancelAppointment = async (req, res) => {
     }
 
     // Promijeni status u "canceled"
-    appointmentData.status = 'canceled';
-    await appointmentData.save();
+  appointmentData.status = 'canceled';
+  await appointmentData.save();
 
     // Vraćanje slobodnog termina doktoru
     const doctorData = await doctorModel.findById(appointmentData.docId);
@@ -239,6 +241,19 @@ const cancelAppointment = async (req, res) => {
         );
       }
       await doctorModel.findByIdAndUpdate(doctorData._id, { slots_booked });
+    }
+
+    // Email notifications (best-effort)
+    try {
+      const { sendEmail, formatApptSummary } = await import('../utils/mailer.js')
+      const subject = 'Termin otkazan'
+      const text = formatApptSummary({ appt: appointmentData, prefix: 'Vaš termin je otkazan' })
+      const patientEmail = appointmentData?.userData?.email
+      const doctorEmail = appointmentData?.docData?.email
+      if (patientEmail) sendEmail({ to: patientEmail, subject, text })
+      if (doctorEmail) sendEmail({ to: doctorEmail, subject, text })
+    } catch (e) {
+      console.warn('Email notify failed or disabled:', e?.message || e)
     }
 
     res.json({ success: true, message: 'Appointment canceled successfully', appointment: appointmentData });

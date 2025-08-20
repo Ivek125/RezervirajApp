@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AdminContext } from '../context/AdminContext';
+import { DoctorContext } from '../context/DoctorContext';
 import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { LogOut } from 'lucide-react';
@@ -7,6 +8,7 @@ import { LogOut } from 'lucide-react';
 
 const Navbar = () => {
   const { aToken, setAToken } = useContext(AdminContext);
+  const { dToken, setDToken } = useContext(DoctorContext);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -14,6 +16,10 @@ const Navbar = () => {
     if (aToken) {
       setAToken('');
       localStorage.removeItem('aToken');
+    }
+    if (dToken) {
+      setDToken('');
+      localStorage.removeItem('dToken');
     }
   };
 

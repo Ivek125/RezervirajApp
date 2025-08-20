@@ -32,6 +32,7 @@ const App = () => {
       <ToastContainer />
         <Navbar />
         <div className='flex items-start bg-white'>
+          
           <Sidebar />
           <Routes>
             {/* Admin Routes */}
@@ -42,6 +43,7 @@ const App = () => {
             <Route path='/admin/add-doctor' element={<AddDoctor />} />
 
             {/* Doctor Routes */}
+            
             <Route path='/doctor/dashboard' element={<DoctorDashboard />} />
             <Route path='/doctor/profile' element={<DoctorProfile />} />
             <Route path='/doctor/appointments' element={<DoctorAppointment />} />

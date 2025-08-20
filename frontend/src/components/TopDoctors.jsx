@@ -39,13 +39,7 @@ export const TopDoctors = () => {
       </div>
 
       <div className="text-center mt-8">
-        <Link 
-          to="/lijecnici" 
-          className="bg-gray-800 hover:bg-gray-500 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition duration-300"
-          onClick={() => window.scrollTo(0, 0)} 
-        >
-          More
-        </Link>
+        
       </div>
     </div>
   );

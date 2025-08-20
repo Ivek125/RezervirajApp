@@ -1,5 +1,6 @@
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
+import { sendEmail, formatApptSummary } from "../utils/mailer.js";
 import bycrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -54,8 +55,9 @@ const loginDoctor = async (req, res) => {
 //API za doktor appointments za doktora
 const appointmentsDoctor = async (req, res) => {
   try {
-    const { docId } = req.body;
-    const appointments = await appointmentModel.find({ docId });
+  // Prefer id from auth middleware; fallback to body
+  const docId = req?.body?.docId;
+  const appointments = await appointmentModel.find({ docId });
     res.json({ success: true, appointments });
   } catch (error) {
     console.log(error);
@@ -66,7 +68,7 @@ const appointmentsDoctor = async (req, res) => {
 // API za prihvaćanje termina od strane doktora
 const acceptAppointment = async (req, res) => {
   try {
-    const { appointmentId, docId } = req.body;
+  const { appointmentId, docId } = req.body;
 
     if (!appointmentId) {
       return res
@@ -92,8 +94,16 @@ const acceptAppointment = async (req, res) => {
     }
 
     // postavljanje statusa na "confirmed" (što tvoj model koristi)
-    appt.status = "confirmed";
-    await appt.save();
+  appt.status = "confirmed";
+  await appt.save();
+
+  // send emails (best-effort)
+  const subject = "Termin potvrđen";
+  const text = formatApptSummary({ appt, prefix: "Vaš termin je potvrđen" });
+  const patientEmail = appt?.userData?.email;
+  const doctorEmail = appt?.docData?.email;
+  if (patientEmail) sendEmail({ to: patientEmail, subject, text });
+  if (doctorEmail) sendEmail({ to: doctorEmail, subject, text });
 
     return res.json({
       success: true,
@@ -133,9 +143,9 @@ const cancelAppointmentDoctor = async (req, res) => {
     }
 
     // postavljanje statusa na "canceled"
-    appt.status = "canceled";
+  appt.status = "canceled";
 
-    await appt.save();
+  await appt.save();
 
     //vracanje termina
     const doctorData = await doctorModel.findById(docId);
@@ -152,7 +162,15 @@ const cancelAppointmentDoctor = async (req, res) => {
       await doctorModel.findByIdAndUpdate(docId, { slots_booked });
     }
 
-    return res.json({
+  // send emails (best-effort)
+  const subject = "Termin otkazan";
+  const text = formatApptSummary({ appt, prefix: "Vaš termin je otkazan" });
+  const patientEmail = appt?.userData?.email;
+  const doctorEmail = appt?.docData?.email;
+  if (patientEmail) sendEmail({ to: patientEmail, subject, text });
+  if (doctorEmail) sendEmail({ to: doctorEmail, subject, text });
+
+  return res.json({
       success: true,
       message: "Appointment canceled successfully",
       appointment: appt,

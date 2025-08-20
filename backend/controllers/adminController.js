@@ -5,6 +5,7 @@ import doctorModel from '../models/doctorModel.js'; // Import the doctor model
 import appointmentModel from '../models/appointmentModel.js';
 import userModel from '../models/userModel.js'; // Import the user model
 import jwt from 'jsonwebtoken'; // Import JWT for token generation
+import { sendEmail, formatApptSummary } from '../utils/mailer.js';
 
 
 // API za dodavanje liječnika
@@ -128,6 +129,26 @@ const cancelAppointment = async (req, res) => {
 
     appointment.status = 'canceled';
     await appointment.save();
+
+    // Free the doctor's slot as well
+    const doctorData = await doctorModel.findById(appointment.docId);
+    if (doctorData) {
+      let slots_booked = doctorData.slots_booked || {};
+      if (slots_booked[appointment.slotDate]) {
+        slots_booked[appointment.slotDate] = slots_booked[appointment.slotDate].filter(
+          (t) => t !== appointment.slotTime
+        );
+      }
+      await doctorModel.findByIdAndUpdate(doctorData._id, { slots_booked });
+    }
+
+    // Email notifications (best-effort)
+    const subject = 'Termin otkazan (admin)';
+    const text = formatApptSummary({ appt: appointment, prefix: 'Termin je otkazan' });
+    const patientEmail = appointment?.userData?.email;
+    const doctorEmail = appointment?.docData?.email;
+    if (patientEmail) sendEmail({ to: patientEmail, subject, text });
+    if (doctorEmail) sendEmail({ to: doctorEmail, subject, text });
 
     res.json({ success: true, message: 'Appointment canceled successfully' });
   } catch (error) {

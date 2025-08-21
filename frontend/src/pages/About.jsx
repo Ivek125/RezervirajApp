@@ -9,7 +9,7 @@ const About = () => {
       {/* Hero Section */}
       <section className="py-36 bg-cover bg-center" style={{ backgroundImage: `url(${assets.about1})` }}>
         <div className="text-center text-white">
-          <div className="bg-gray-800/80 5 p-6 rounded-lg shadow-lg max-w-2xl mx-auto mb-4">
+          <div className="bg-gray-800/90 p-6 rounded-lg shadow-lg max-w-2xl mx-auto mb-4">
           <h1 className="text-4xl font-extrabold mb-4">O našoj bolnici</h1>
           <p className="text-xl mb-0">Stručnjaci u pružanju najviše kvalitete zdravstvene zaštite</p>
           </div>

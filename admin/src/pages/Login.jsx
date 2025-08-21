@@ -56,11 +56,11 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-100 to-gray-200">
-      <form onSubmit={onSubmitHandler} className="bg-white rounded-2xl shadow-2xl w-[420px] overflow-hidden border border-gray-200">
+      <form onSubmit={onSubmitHandler} className=" bg-white rounded-2xl shadow-2xl w-[420px] overflow-hidden border border-gray-200">
         {/* Header */}
         <div className="bg-gray-800 text-white text-center py-5">
           <h2 className="text-2xl font-semibold tracking-wide">
-            <span className="text-gray-800 bg-white p-3 rounded-3xl">{state}</span> Login
+            <span className="text-gray-800 bg-white p-3 rounded-3xl ">{state}</span> Login
           </h2>
         </div>
 

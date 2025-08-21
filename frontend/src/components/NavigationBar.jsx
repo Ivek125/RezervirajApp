@@ -16,7 +16,7 @@ import { LogIn } from "lucide-react";
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Liječnici', href: '/lijecnici' },
+  { name: 'Doktori', href: '/lijecnici' },
   { name: 'O nama', href: '/o-nama' },
   { name: 'Kontakt', href: '/kontakt' },
   { name: 'Moji Termini', href: '/mojiTermini' },

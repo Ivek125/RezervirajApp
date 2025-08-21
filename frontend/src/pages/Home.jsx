@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
-import Categories from '../components/DoctorCategories'
-import {TopDoctors} from '../components/TopDoctors'
+import Categories from '../components/Kategorije'
+import {TopDoctors} from '../components/HomeDoctors'
 
 
 function Home() {

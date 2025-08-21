@@ -3,18 +3,18 @@ import Login from './pages/Login'
  import { ToastContainer, toast } from 'react-toastify';
  import 'react-toastify/dist/ReactToastify.css';
 import { useContext } from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/NavigationBar';
 import { AdminContext } from './context/AdminContext';
 import { DoctorContext } from './context/DoctorContext';
 import Sidebar from './components/sidebar';
 import { Routes, Route } from 'react-router-dom';
-import Dashboard from './pages/Admin/Dashboard';
+import Dashboard from './pages/Admin/Statistika';
 import DoctorList from './pages/Admin/DoctorList';
 import AllAppointments from './pages/Admin/AllAppointments';
-import AddDoctor from './pages/Admin/AddDoctor';
-import DoctorDashboard from './pages/Doctor/DoctorDashboard';
+import AddDoctor from './pages/Admin/DodajDoctora';
+import DoctorDashboard from './pages/Doctor/DoctorStatistika';
 import DoctorProfile from './pages/Doctor/DoctorProfile';
-import DoctorAppointment from './pages/Doctor/DoctorAppointment';
+import DoctorAppointment from './pages/Doctor/DoctorTermini';
 
 
 const App = () => {

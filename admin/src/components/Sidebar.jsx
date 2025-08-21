@@ -47,7 +47,7 @@ const Sidebar = () => {
                 }
               >
                 <img src={assets.people_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-                <p>Doctors</p>
+                <p>Doktori</p>
               </NavLink>
 
               <NavLink
@@ -58,7 +58,7 @@ const Sidebar = () => {
                 }
               >
                 <img src={assets.appointment_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-                <p>Appointments</p>
+                <p>Termini</p>
               </NavLink>
 
               <NavLink
@@ -69,7 +69,7 @@ const Sidebar = () => {
                 }
               >
                 <img src={assets.add_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-                <p>Add Doctor</p>
+                <p>Dodaj doktora</p>
               </NavLink>
 
               <NavLink
@@ -96,7 +96,7 @@ const Sidebar = () => {
                 }
               >
                 <img src={assets.home_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-                <p>Dashboard</p>
+                <p>Statistika</p>
               </NavLink>
 
               <NavLink
@@ -107,7 +107,7 @@ const Sidebar = () => {
                 }
               >
                 <img src={assets.people_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-                <p>Profile</p>
+                <p>Profil</p>
               </NavLink>
 
               <NavLink
@@ -118,7 +118,7 @@ const Sidebar = () => {
                 }
               >
                 <img src={assets.appointment_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
-                <p>Appointments</p>
+                <p>Termini</p>
               </NavLink>
             </>
           )}

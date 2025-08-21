@@ -69,7 +69,7 @@ useEffect(() => {
   
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex items-center justify-center min-h-[60vh] bg-gray-100">
+      <div className="flex p-10 items-center justify-center min-h-[60vh] bg-gray-100">
         <div className="bg-white p-6 rounded-lg shadow-lg w-96">
           {!showRegister ? (
             <>

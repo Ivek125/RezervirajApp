@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
-import RelatedDoctors from "../components/RelatedDoctors";
+import RelatedDoctors from "../components/FiltriraniDoctors";
 
 function Doctors() {
   const { doctors, doctorsCategories } = useContext(AppContext);
   const { speciality } = useParams();
   const navigate = useNavigate();
 
-  // State to track the active category
+  // Stanje aktivne kategorije
   const [activeCategory, setActiveCategory] = useState(speciality ? speciality.toLowerCase() : 'svi liječnici');
 
   // Normalize the specialty parameter from the URL
@@ -45,7 +45,7 @@ function Doctors() {
             onClick={() => handleCategoryClick('Svi liječnici')}
             className={`py-3 px-5 rounded-xl shadow-md hover:bg-gray-200 relative group cursor-pointer transition text-gray-800 text-left font-medium ${activeCategory === 'svi liječnici' ? 'bg-gray-700 text-white hover:bg-gray-700' : 'bg-white'}`}
           >
-            Svi liječnici
+            Svi 
           </button>
 
           {/* List of doctor categories with conditional bg */}

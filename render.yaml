@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: rezerviraj-backend
+    env: node
+    plan: free
+    region: oregon
+    buildCommand: "npm install && npm run build || true"
+    startCommand: "npm run start"
+    autoDeploy: true
+    branch: main
+    envVars:
+      - key: MONGODB_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
+      - key: MAIL_REDIRECT_TO
+        sync: false
+
+staticSites:
+  - name: rezerviraj-frontend
+    repo: .
+    branch: main
+    path: frontend
+    buildCommand: "npm install && npm run build"
+    outputPath: dist
+    env:
+      - key: VITE_BACKEND_URL
+        sync: false
+    autoDeploy: true
+
+  - name: rezerviraj-admin
+    repo: .
+    branch: main
+    path: admin
+    buildCommand: "npm install && npm run build"
+    outputPath: dist
+    env: []
+    autoDeploy: true

@@ -6,7 +6,7 @@ import {
   MenuButton,
   MenuItem,
   MenuItems,
-  Transition,
+  Transition
 } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';

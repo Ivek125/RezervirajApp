@@ -22,10 +22,9 @@ import doc8 from "./doc8.png";
 
 // Category images
 import Dermatologist from "./Dermatologist.png";
-import General_physician from "./General_physician.png";
+import General_physician from "./general_physician.png";
 import Pediatricians from "./pediatricians.png";
-import Stomatologist from "./stomatologist.png"; // Dodajem jer ti koristiš i .png stomatologa!
-
+import Stomatologist from "./stomatologist.png"; 
 // About page images
 import about1 from "./about1.png";
 import about2 from "./about2.png";

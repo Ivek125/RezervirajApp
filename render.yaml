@@ -4,45 +4,45 @@ services:
     env: node
     plan: free
     region: oregon
-    buildCommand: "npm install && npm run build || true"
-    startCommand: "npm run start"
-    autoDeploy: true
+    build_command: "npm install && npm run build || true"
+    start_command: "npm run start"
+    auto_deploy: true
     branch: main
-    envVars:
+    env:
       - key: MONGODB_URL
-        sync: false
+        value: ""
       - key: JWT_SECRET
-        sync: false
+        value: ""
       - key: SMTP_HOST
-        sync: false
+        value: ""
       - key: SMTP_PORT
-        sync: false
+        value: ""
       - key: SMTP_USER
-        sync: false
+        value: ""
       - key: SMTP_PASS
-        sync: false
+        value: ""
       - key: SMTP_FROM
-        sync: false
+        value: ""
       - key: MAIL_REDIRECT_TO
-        sync: false
+        value: ""
 
-staticSites:
+static_sites:
   - name: rezerviraj-frontend
     repo: .
     branch: main
-    path: frontend
-    buildCommand: "npm install && npm run build"
-    outputPath: dist
+    root: frontend
+    build_command: "npm install && npm run build"
+    publish_dir: dist
     env:
       - key: VITE_BACKEND_URL
-        sync: false
-    autoDeploy: true
+        value: ""
+    auto_deploy: true
 
   - name: rezerviraj-admin
     repo: .
     branch: main
-    path: admin
-    buildCommand: "npm install && npm run build"
-    outputPath: dist
+    root: admin
+    build_command: "npm install && npm run build"
+    publish_dir: dist
     env: []
-    autoDeploy: true
+    auto_deploy: true

@@ -1,7 +1,7 @@
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
 import { sendEmail, formatApptSummary } from "../utils/mailer.js";
-import bycrypt from "bcrypt";
+import bycrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const changeAvailability = async (req, res) => {

@@ -26,7 +26,7 @@ const Dashboard = () => {
       const appointments = dashData.latestAppointments;
 
       //graf broj termina po danima u tjednu 
-      const weekDays = ['Pon','Uto','Sri','Čet','Pet','Sub','Ned'];
+      const weekDays = ['Ned','Pon','Uto','Sri','Čet','Pet','Sub']; //ostavi prvi dana ned simpler
       const daysCount = weekDays.map(day => ({ dan: day, count: 0 }));
 
       appointments.forEach(apt => {

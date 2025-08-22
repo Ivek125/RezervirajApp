@@ -10,7 +10,7 @@ const DoctorDashboard = () => {
   }, [dToken]);
 
   const { weeklyAppointments, todayAppointments } = useMemo(() => {
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const weekDays = ["Ned", "Pon", "Uto", "Sri", "Čet", "Pet", "Sub"];
   const todayDate = new Date().toISOString().split("T")[0];
 
   // ako nema podataka odmah vrati prazne nizove
@@ -64,18 +64,7 @@ const DoctorDashboard = () => {
         </div>
       </div>
 
-      {/* graf 1 Termini po danima u tjednu */}
-      <div className="bg-white p-6 rounded-2xl shadow">
-        <h2 className="text-xl font-semibold mb-4">Termini ovaj tjedan</h2>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={weeklyAppointments}>
-            <XAxis dataKey="day" />
-            <YAxis />
-            <Tooltip />
-            <Bar dataKey="count" fill="#3b82f6" radius={[8, 8, 0, 0]} />
-          </BarChart>
-        </ResponsiveContainer>
-      </div>
+      
 
       {/* graf 2 Današnji termini po satima */}
       <div className="bg-white p-6 rounded-2xl shadow">
@@ -86,6 +75,19 @@ const DoctorDashboard = () => {
             <YAxis />
             <Tooltip />
             <Bar dataKey="count" fill="#10b981" radius={[8, 8, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* graf 1 Termini po danima u tjednu */}
+      <div className="bg-white p-6 rounded-2xl shadow">
+        <h2 className="text-xl font-semibold mb-4">Termini ovaj tjedan</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={weeklyAppointments}>
+            <XAxis dataKey="day" />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="count" fill="#3b82f6" radius={[8, 8, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

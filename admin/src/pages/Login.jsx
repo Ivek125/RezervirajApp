@@ -31,6 +31,8 @@ function Login() {
           localStorage.setItem('aToken', data.token);
           setAToken(data.token);
           toast.success(data.message)
+          console.log(data.token);
+          navigate('/admin/dashboard');
 
         } 
         }else {

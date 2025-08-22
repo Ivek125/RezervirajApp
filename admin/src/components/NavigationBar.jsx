@@ -30,7 +30,7 @@ const Navbar = () => {
         {/* Logo i naslov */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 text-center sm:text-left ">
           <img
-            src={assets.admin_logo}
+            src={assets.logo}
             alt="Logo"
             className="h-10 w-auto mx-auto sm:mx-0"
           />

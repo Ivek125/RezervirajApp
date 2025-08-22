@@ -18,7 +18,7 @@ const DoctorDashboard = () => {
     return { weeklyAppointments: weekDays.map(day => ({ day, count: 0 })), todayAppointments: [] };
   }
 
-  // računanje
+  // racnanje
   const weekly = weekDays.map((day) => ({ day, count: 0 }));
   const today = {};
 
@@ -27,7 +27,7 @@ const DoctorDashboard = () => {
     const dayIndex = new Date(appt.slotDate).getDay();
     weekly[dayIndex].count++;
 
-    // Daily (samo današnji)
+    // Daily (samo danasnji)
     if (appt.slotDate === todayDate) {
       const hour = appt.slotTime.split(":")[0] + ":00";
       today[hour] = (today[hour] || 0) + 1;
@@ -64,7 +64,7 @@ const DoctorDashboard = () => {
         </div>
       </div>
 
-      {/* 📊 Graf 1: Termini po danima u tjednu */}
+      {/* graf 1 Termini po danima u tjednu */}
       <div className="bg-white p-6 rounded-2xl shadow">
         <h2 className="text-xl font-semibold mb-4">Termini ovaj tjedan</h2>
         <ResponsiveContainer width="100%" height={300}>
@@ -77,7 +77,7 @@ const DoctorDashboard = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* 📊 Graf 2: Današnji termini po satima */}
+      {/* graf 2 Današnji termini po satima */}
       <div className="bg-white p-6 rounded-2xl shadow">
         <h2 className="text-xl font-semibold mb-4">Današnji termini po satima</h2>
         <ResponsiveContainer width="100%" height={300}>

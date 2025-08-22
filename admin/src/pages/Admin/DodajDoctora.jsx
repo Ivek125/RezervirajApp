@@ -20,7 +20,7 @@ const AddDoctor = () => {
 
     const { backendUrl, aToken } = useContext(AdminContext);
 
-    // Funkcija za provjeru "strong passworda"
+    // Funkcija za provjeru strong passworda
     const isStrongPassword = (password) => {
         const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         return strongPasswordRegex.test(password);

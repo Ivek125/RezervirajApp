@@ -15,7 +15,7 @@ const Sidebar = () => {
   const activeNavItemClass =
     'bg-gray-700 text-white border-white border-l-4';
 
-  // Ako nema ni admina ni doktora -> ne prikazuj ništa
+  // Ako nema ni admina ni doktora ne prikazuj ništa
   if (!aToken && !dToken) return null;
 
   return (
@@ -79,7 +79,7 @@ const Sidebar = () => {
                   `${navItemClass} ${isActive ? activeNavItemClass : ''} mt-2`
                 }
               >
-                <img src={assets.home_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
+                <img src={assets.stats_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
                 <p>Statistika</p>
               </NavLink>
             </>
@@ -95,7 +95,7 @@ const Sidebar = () => {
                   `${navItemClass} ${isActive ? activeNavItemClass : ''}`
                 }
               >
-                <img src={assets.home_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
+                <img src={assets.stats_icon} alt="" className="bg-white p-2 rounded-xl w-11" />
                 <p>Statistika</p>
               </NavLink>
 

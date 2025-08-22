@@ -118,7 +118,7 @@ const DoctorProfilePanel = () => {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    available: e.target.value === "true", // konvertiramo string u boolean
+                    available: e.target.value === "true", // konvertira string u boolean
                   })
                 }
                 className="mt-1 w-full p-2 border rounded-md"

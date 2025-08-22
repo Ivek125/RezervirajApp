@@ -25,7 +25,7 @@ const Dashboard = () => {
     if (dashData?.latestAppointments) {
       const appointments = dashData.latestAppointments;
 
-      // --- Graf 1: Broj termina po danima u tjednu ---
+      //graf broj termina po danima u tjednu 
       const weekDays = ['Pon','Uto','Sri','Čet','Pet','Sub','Ned'];
       const daysCount = weekDays.map(day => ({ dan: day, count: 0 }));
 
@@ -38,7 +38,7 @@ const Dashboard = () => {
 
       setDailyData(daysCount);
 
-      // --- Graf 2: Broj termina po satima (9-17) ---
+      // graf broj termina po satima (9-17
       const hours = Array.from({ length: 9 }, (_, i) => 9 + i); // 9-17
       const hourCount = hours.map(h => ({ sat: `${h}:00`, count: 0 }));
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
 
       setHourlyData(hourCount);
 
-      // --- Statusi ---
+      // Statusi 
       const pending = appointments.filter(a => a.status === 'pending').length;
       const confirmed = appointments.filter(a => a.status === 'confirmed').length;
       const canceled = appointments.filter(a => a.status === 'canceled').length;
@@ -60,11 +60,11 @@ const Dashboard = () => {
 
   return (
     <div className="  bg-white  rounded-2xl shadow-lg space-y-3 p-8 flex flex-col lg:flex-row gap-8 w-6xl mx-auto text-gray-900">
-      {/* Lijevi dio: Grafovi */}
+      {/*Lijevi dio: graf */}
       <div className="flex-1">
         <h2 className="text-2xl font-bold text-gray-800 border-b pb-3 mb-10">Statistika </h2>
 
-        {/* Graf: termini po danima */}
+        {/* graf termini po danima */}
         <h3 className="text-xl font-semibold mb-2">Termini po danima u tjednu</h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={dailyData}>
@@ -76,7 +76,7 @@ const Dashboard = () => {
           </BarChart>
         </ResponsiveContainer>
 
-        {/* Graf: termini po satima */}
+        {/* graf termini po satima */}
         <h3 className="text-xl font-semibold mt-8 mb-2">Termini po satima u danu</h3>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={hourlyData}>
@@ -89,7 +89,7 @@ const Dashboard = () => {
         </ResponsiveContainer>
       </div>
 
-      {/* Desni dio: kartica sa statistikom */}
+      {/* Desni dio kartica sa statistikom */}
       <div className="w-full lg:w-1/4 bg-white rounded-lg shadow-md p-6 flex flex-col gap-4">
         <h3 className="text-xl font-bold mb-4">Ukupna statistika</h3>
         <p><strong>Doktori:</strong> {dashData?.doctors || 0}</p>
